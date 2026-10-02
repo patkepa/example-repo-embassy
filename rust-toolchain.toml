@@ -1,0 +1,6 @@
+[toolchain]
+channel = "1.96.0"
+components = ["rustfmt", "clippy"]
+targets = ["riscv32imac-unknown-none-elf"]
+profile = "minimal"
+

@@ -1,0 +1,12 @@
+schemaVersion: 1
+name: esp32c6-embassy
+steps:
+  - id: build
+    image: rust:1.96.0-bookworm
+    workdir: /workspace
+    commands:
+      - ["rustup", "target", "add", "riscv32imac-unknown-none-elf"]
+      - ["sh", "scripts/build.sh"]
+    resultManifest: build/dasahi-result.json
+    outputs: [firmware]
+

@@ -1,0 +1,25 @@
+name: Build ESP32-C6 firmware
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: rust:1.96.0-bookworm
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install RISC-V target
+        run: rustup target add riscv32imac-unknown-none-elf
+      - name: Build firmware and Dasahi result
+        run: sh scripts/build.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: esp32c6-firmware
+          path: build/
+          if-no-files-found: error
